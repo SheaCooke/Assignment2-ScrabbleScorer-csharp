@@ -142,7 +142,7 @@ namespace Assignment2_ScrabbleScorer_csharp
             do
             {
                 Console.WriteLine("Welcome to Scrabble Scorer! \n Please choose a scoring algoriths:\n1-Scrabble\n2-Simple Score\n3-Bonus Vowles\n or type \"stop\"");
-                input = Console.ReadLine().ToLower();
+                input = Console.ReadLine().ToLower().Trim();
             }
             while (!validChoices.Contains(input));
 
@@ -160,7 +160,7 @@ namespace Assignment2_ScrabbleScorer_csharp
         {
             string choice;
             string word;
-            bool invalidWord = false;
+            bool invalidWord;
             
 
             while (true)
@@ -172,18 +172,22 @@ namespace Assignment2_ScrabbleScorer_csharp
                 }
                 do
                 {
+                    invalidWord = false;
                     Console.WriteLine("Please enter a word");
                     word = Console.ReadLine().ToLower();
                     foreach (char i in word)
                     {
                         if (i < 97 || i > 122)
                         {
-                            invalidWord = true;
-                            Console.WriteLine("Words can only contain letters. Please enter another word: ");
-
+                            invalidWord = true;                           
                         }
+                        
                     }
-                    
+                    if (invalidWord)
+                    {
+                        Console.WriteLine("Words can only contain letters. Please enter another word: ");
+                    }
+
                 }
                 while (invalidWord);
 
