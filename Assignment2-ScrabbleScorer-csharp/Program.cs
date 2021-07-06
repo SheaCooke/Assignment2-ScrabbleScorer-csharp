@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Assignment2_ScrabbleScorer_csharp
 {
-    class Program
+    public class Program
     {
         //Here is the original OldPointStructure dictionay
         public static Dictionary<int, string> oldPointStructure = new Dictionary<int, string>()
@@ -30,16 +30,16 @@ namespace Assignment2_ScrabbleScorer_csharp
         //Code your Transform method here
         static Dictionary<char,int> Transform()
         {
-            Dictionary<char, int> dict = new Dictionary<char, int>();
+            Dictionary<char, int> dict = new Dictionary<char, int>(); // declare dictionary that will be returned 
             foreach (var i in oldPointStructure)
             {
-                char[] arr = oldPointStructure[i.Key].ToLower().ToCharArray();
+                char[] arr = oldPointStructure[i.Key].ToLower().ToCharArray(); // make the string values into char arrays 
 
                 foreach (char j in arr) 
                 {
-                    if (j >= 97 && j <= 122)
+                    if (j >= 97 && j <= 122) // filter out any nonalphabetical characters 
                     {
-                        dict[j] = i.Key;
+                        dict[j] = i.Key; // add to new dictionary, individual characters as keys, keys from old dictionary as values 
                     }
                 }
 
@@ -60,10 +60,10 @@ namespace Assignment2_ScrabbleScorer_csharp
 
 
         //SimpleScorer-----
-        static int SimpleScorer(string word)
+        public static int SimpleScorer(string word)
         {
             Console.WriteLine($"The word {word} has a score of {word.Length}\n");
-            return word.Length;
+            return word.Length; // score is = to the length of the word 
 
         }
         //public static void SimpleScorer()
@@ -73,13 +73,13 @@ namespace Assignment2_ScrabbleScorer_csharp
 
 
         //BonusVowels-----
-        static int BonusVowels(string word)
+        public static int BonusVowels(string word)
         {
             
             List<char> vowles = new List<char> {'a','e','i','o','u'};
             int score = word.Length;
 
-            foreach (char i in word)
+            foreach (char i in word) // find all vowels in word and add 2 points per 
             {
                 if (vowles.Contains(i))
                 {
@@ -95,13 +95,13 @@ namespace Assignment2_ScrabbleScorer_csharp
 
 
         //ScrabbleScorer-----
-        static int ScrabbleScorer(string word)
+        public static int ScrabbleScorer(string word)
         {
-            word.ToLower();
+            
             int points = 0;
             foreach (char i in word)
             {
-                points += newPointStructure[i];
+                points += newPointStructure[i]; // add points equal to the value assigned to the character in the new dictionary 
             }
             Console.WriteLine($"The word {word} has a score of {points}\n");
             return points;
@@ -115,7 +115,7 @@ namespace Assignment2_ScrabbleScorer_csharp
 
         static int ScoringAlgorithms(string word, string choice)
         {
-            if (choice == "2")
+            if (choice == "2") // invokes another method based on arguments 
             {
                 return SimpleScorer(word);
             }
@@ -139,7 +139,7 @@ namespace Assignment2_ScrabbleScorer_csharp
         {
             List<string> validChoices = new List<string> {"1","2","3","stop"};
             string input;
-            do
+            do // validate user input 
             {
                 Console.WriteLine("Welcome to Scrabble Scorer! \n Please choose a scoring algoriths:\n1-Scrabble\n2-Simple Score\n3-Bonus Vowles\n or type \"stop\"");
                 input = Console.ReadLine().ToLower().Trim();
@@ -163,7 +163,7 @@ namespace Assignment2_ScrabbleScorer_csharp
             bool invalidWord;
             
 
-            while (true)
+            while (true) // go until user enters "stop"
             {
                 choice = InitialPrompt();
                 if (choice.ToLower() == "stop")
@@ -174,12 +174,12 @@ namespace Assignment2_ScrabbleScorer_csharp
                 {
                     invalidWord = false;
                     Console.WriteLine("Please enter a word");
-                    word = Console.ReadLine().ToLower();
+                    word = Console.ReadLine().ToLower().Trim();
                     foreach (char i in word)
                     {
                         if (i < 97 || i > 122)
                         {
-                            invalidWord = true;                           
+                            invalidWord = true;  // validate user input                          
                         }
                         
                     }
